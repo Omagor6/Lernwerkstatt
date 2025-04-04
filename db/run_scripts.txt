@@ -1,0 +1,4 @@
+\c postgres
+\i '...\\Lernwerkstatt\\db\\create_db_with_role.sql'
+\c lernwe_local
+\i '...\\Lernwerkstatt\\db\\create_tables.sql'
