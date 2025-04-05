@@ -14,8 +14,9 @@ def get_contact_persons(person_id):
 
 @app.get("/students/")
 def get_contacts():
-    
-    return {person_service.get_students()}
+    raw_rows = person_service.get_students()
+    students = [dict(row) for row in raw_rows]
+    return students
 
 @app.get("/goals/{person_id}")
 def get_goals(person_id):

@@ -6,7 +6,7 @@ from fastapi import HTTPException, status
 
 
 def load_db_config():
-    config_file = "app\\db\\connection_manager\\db_config.json"
+    config_file = "app\\db\\config.json"
     try:
         with open(config_file, "r") as file:
             return json.load(file)
