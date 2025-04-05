@@ -43,4 +43,4 @@ def get_goals(person_id: str):
 
 @app.get("grades/{person_id}")
 def get_grades(person_id):
-    return json.dumps()
+    return 
