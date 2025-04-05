@@ -143,3 +143,5 @@ Now the command should work:
   ## Authorization and Access Management
 
   These are functiontalities have not been implemented yet. With FastApi this can be added.
+  Authentication can be done similarly to [this](https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/).
+  Authorization on the other hand can be done within the API by querying the person id and retrieving their permissions, [this](https://fastapi.tiangolo.com/advanced/security/http-basic-auth/) can be an interesting resource for this purpose.
