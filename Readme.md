@@ -28,7 +28,7 @@ Currently not all implemented endpoints access the database yet. Mock data is re
 1. Open **pgAdmin 4**
 2. Under the user **postgres**, open the **PSQL Tool**
 
-   ![Database Setup Screenshot](.\resources\psql_tool.png)
+   ![Database Setup Screenshot](.\psql_tool.png)
 
 3. Execute the script “app\db\create_db_with_role.sql" on the user postgres. This will create the database "lernwe_local".
 
@@ -94,7 +94,7 @@ Now the command should work:
 
 ## Database Design
 
-   ![ERD](.\resources\erd.png)
+   ![ERD](.\erd.png)
 
    **person**
 
