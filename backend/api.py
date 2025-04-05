@@ -43,7 +43,9 @@ def get_goals(person_id: str):
 @app.get("/grades/{person_id}")
 def get_grades(person_id):
     grades = [
-        vars(grade_dto.grade_dto("Mathe", "6", datetime.datetime(2023, 5, 17, 10, 40, 0))),
-        vars(grade_dto.grade_dto("Deutsch", "3", datetime.datetime(2022, 7, 17, 10, 20, 0)))
+        vars(grade_dto.grade_dto("Mathe", "4", datetime.datetime(2023, 5, 17, 10, 40, 0))),
+        vars(grade_dto.grade_dto("Deutsch", "3", datetime.datetime(2022, 7, 17, 10, 20, 0))),
+        vars(grade_dto.grade_dto("Deutsch", "5.5", datetime.datetime(2023, 7, 17, 10, 20, 0))),
+        vars(grade_dto.grade_dto("Mathe", "6", datetime.datetime(2023, 1, 17, 10, 40, 0))),
     ]
     return JSONResponse(content=grades)
