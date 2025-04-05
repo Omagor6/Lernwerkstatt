@@ -5,5 +5,5 @@ import json
 
 
 def get_goals(person_id):
-    goals = goal_repository.get_goals(person_id)
-    return None
+    return goal_repository.get_goals(person_id)
+    
