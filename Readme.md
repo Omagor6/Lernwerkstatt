@@ -70,7 +70,7 @@ This will create a folder "venv" in your repository.
 
 `.\venv\Scripts\activate`
 
-_Hint: If the execution of PoserShell scripts is disabled on your system, you might get a PSSecurityException. You can run the following command to disable the security restrictions 
+_Hint: If the execution of PowerShell scripts is disabled on your system, you might get a PSSecurityException. You can run the following command to disable the security restrictions 
 for the current session. 
 
 `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`
@@ -89,7 +89,7 @@ Now the command should work:
   - psycopg2
   - fastapi
 
-5. Start the application with uvicorn:
+5. Start the application with uvicorn, make sure that you are in the backend-folder:
 `uvicorn api:app --reload`
 
 ## Database Design
@@ -133,7 +133,7 @@ Now the command should work:
 
   **Service**
 
-  For more complex requests, that require data from multiple layers, a service layer is used to make the code more readable and well structured. 
+  For more complex requests, that require data from multiple layers and tables, a service layer is used to make the code more readable and well structured. 
 
   **Repository and DB access manager**
 
