@@ -87,3 +87,7 @@ Now the command should work:
 
 5. Start the application with uvicorn:
 `uvicorn api:app --reload`
+
+## Database Design
+
+   ![ERD](.\resources\erd.png)
