@@ -39,7 +39,7 @@ def get_goals(person_id: str):
         goal_dto.goal_dto("ABS2", "Ich kommuniziere rechtzeitig meine Absenzen", datetime.datetime(2020, 5, 17, 10, 30, 0), datetime.date(2020, 5, 17), "individual", "0"),
         goal_dto.goal_dto("AAA6", "Ich bin teamfähig", datetime.datetime(2020, 5, 17, 10, 40, 0), datetime.date(2020, 5, 20), "standard", "Erfüllt")
     ]
-    return JSONResponse(content=goals)
+    return JSONResponse(content=vars(goal_dto.goal_dto("ABS2", "Ich kommuniziere rechtzeitig meine Absenzen", datetime.datetime(2020, 5, 17, 10, 30, 0), datetime.date(2020, 5, 17), "individual", "0")))
 
 @app.get("grades/{person_id}")
 def get_grades(person_id):
