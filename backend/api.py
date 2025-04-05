@@ -1,6 +1,6 @@
 from typing import Union
-from service import person_service
-from service.dto import goal_dto
+from app.service import person_service
+from app.service.dto import goal_dto
 import datetime
 import json
 
@@ -14,6 +14,7 @@ def get_contact_persons(person_id):
 
 @app.get("/students/")
 def get_contacts():
+    
     return {person_service.get_students()}
 
 @app.get("/goals/{person_id}")
@@ -24,5 +25,3 @@ def get_goals(person_id):
 @app.get("grades/{person_id}")
 def get_grades(person_id):
     return json.dumps()
-
-

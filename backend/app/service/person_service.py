@@ -1,4 +1,4 @@
-from repository import person_repository
+from app.repository import person_repository
 def get_contact_persons(person_id):
     return person_repository.get_contact_persons(person_id)
 
