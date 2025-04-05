@@ -138,3 +138,8 @@ Now the command should work:
   **Repository and DB access manager**
 
   The repositories access or persist the the data in the database. For this the db_access_manager is used to provide easy and generic access to the database: There is a function for executing a query that updates existing data or creates a new entry - optionally parameters can be set in the query. The second function is used to fetch data. In this case the data is returned as a dict. In addition the DB access manager ensures consistent error handling.
+
+
+  ## Authorization and Access Management
+
+  These are functiontalities have not been implemented yet. With FastApi this can be added.
