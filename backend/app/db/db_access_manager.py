@@ -5,7 +5,7 @@ import json
 from fastapi import HTTPException, status
 
 
-def load_db_config():
+def __load_db_config():
     config_file = "app\\db\\config.json"
     try:
         with open(config_file, "r") as file:
@@ -16,9 +16,9 @@ def load_db_config():
             detail="Error loading database configuration. Please try again later.",
         )
 
-
+# used to persist / update 
 def execute_query(query, params=None):
-    db_config = load_db_config()
+    db_config = __load_db_config()
     try:
         with psycopg2.connect(**db_config) as connection:
             with connection.cursor() as cursor:
@@ -45,10 +45,9 @@ def execute_query(query, params=None):
             detail="An unexpected error occurred. Please try again later."
         )
 
-
-
+# used to fetch data from db
 def fetch_query_results_as_dict(query, params=None):
-    db_config = load_db_config()
+    db_config = __load_db_config()
     try:
         with psycopg2.connect(**db_config) as connection:
             with connection.cursor(cursor_factory=RealDictCursor) as cursor:

@@ -14,6 +14,6 @@ def get_contact_persons(person_id):
 
 def get_students():
     query = """
-    SELECT name, surname, email, apprenticeship FROM person WHERE person_role = 'student'
+    SELECT * FROM person WHERE person_role = 'student'
     """
     return db.fetch_query_results_as_dict(query)
