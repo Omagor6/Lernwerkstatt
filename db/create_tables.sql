@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS absence CASCADE;
 DROP TABLE IF EXISTS goal CASCADE;
 DROP TABLE IF EXISTS person CASCADE;
 DROP TABLE IF EXISTS subject CASCADE;
+DROP TABLE IF EXISTS has_contact;
 
 -- DROP ENUM TYPES
 DROP TYPE IF EXISTS person_role CASCADE;
@@ -12,7 +13,7 @@ DROP TYPE IF EXISTS goal_type CASCADE;
 
 -- CREATE ENUM TYPES
 CREATE TYPE person_role AS ENUM ('student', 'coach', 'bb');
-CREATE TYPE goal_type AS ENUM ('individual');
+CREATE TYPE goal_type AS ENUM ('individual'); -- TODO add more goal types as needed
 
 -- CREATE person TABLE
 CREATE TABLE person (
@@ -55,11 +56,17 @@ CREATE TABLE student_mentor (
     responsible_until   DATE
 );
 
--- CREATE subject TABLE
+-- CREATE subject TABLE:
 CREATE TABLE subject (
     subject_id      SERIAL PRIMARY KEY,
     semester        DATE, -- first day of a semester to identify the semester
     name            VARCHAR(255),
     grades          JSON, -- e.g. [{"grade": "5.0", "weight": 1}, {"grade": "4.5", "weight": 0.5}]
     student_id INT REFERENCES person(person_id) ON DELETE RESTRICT
+);
+
+-- CREATE has_contact TABLE: 
+CREATE TABLE has_contact (
+        student_id   INT REFERENCES person(person_id) ON DELETE RESTRICT,
+        person_id    INT REFERENCES person(person_id) ON DELETE RESTRICT
 );
