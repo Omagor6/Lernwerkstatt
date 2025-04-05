@@ -2,6 +2,7 @@ from typing import Union
 from service import person_service
 from service.dto import goal_dto
 import datetime
+import json
 
 from fastapi import FastAPI
 
@@ -17,7 +18,15 @@ def get_contacts():
 
 @app.get("/goals/{person_id}")
 def get_goals(person_id):
-    return [goal_dto.individual_goal_dto("ABS2", "Ich kommuniziere rechtzeitig meine Absenzen", datetime.datetime(2020, 5, 17, 10, 30, 0), datetime.date(2020, 5, 17), "individual", 0), goal_dto.standard_goal_dto("AAA6", "Ich bin teamfähig", datetime.datetime(2020, 5, 17, 10, 40, 0), datetime.date(2020, 5, 20), "standard", "Erfüllt")]
+    return json.dumps(goal_dto.goal_dto("ABS2", "Ich kommuniziere rechtzeitig meine Absenzen", datetime.datetime(2020, 5, 17, 10, 30, "0"), datetime.date(2020, 5, 17), "individual", 0), goal_dto.goal_dto("AAA6", "Ich bin teamfähig", datetime.datetime(2020, 5, 17, 10, 40, 0), datetime.date(2020, 5, 20), "standard", "Erfüllt"))
     return {person_service.get_goals(person_id)}
+
+@app.get("grades/{person_id}")
+def get_grades(person_id):
+    return json.dumps()
+
+@app.post("grades/{person_id}")
+def get_grades(person_id):
+    return json.dumps()
 
 
