@@ -4,9 +4,10 @@ DROP TABLE IF EXISTS student_mentor CASCADE;
 DROP TABLE IF EXISTS absence CASCADE;
 DROP TABLE IF EXISTS goal CASCADE;
 DROP TABLE IF EXISTS person CASCADE;
+DROP TABLE IF EXISTS subject CASCADE;
 
 -- DROP ENUM TYPES
-DROP TYPE IF EXISTS role CASCADE;
+DROP TYPE IF EXISTS person_role CASCADE;
 DROP TYPE IF EXISTS goal_type CASCADE;
 
 -- CREATE ENUM TYPES
@@ -32,7 +33,8 @@ CREATE TABLE goal (
     grading           INT, -- 1–4 depending on type
     created_timestamp TIMESTAMP DEFAULT current_timestamp,
     due_date          DATE,
-    goal_type         goal_type NOT NULL
+    goal_type         goal_type NOT NULL,
+    student_id INT REFERENCES person(person_id) ON DELETE RESTRICT
 );
 
 -- CREATE absence TABLE
@@ -51,4 +53,13 @@ CREATE TABLE student_mentor (
     mentor_id  INT REFERENCES person(person_id) ON DELETE RESTRICT,
     responsible_from    DATE,
     responsible_until   DATE
+);
+
+-- CREATE subject TABLE
+CREATE TABLE subject (
+    subject_id      SERIAL PRIMARY KEY,
+    semester        DATE, -- first day of a semester to identify the semester
+    name            VARCHAR(255),
+    grades          JSON, -- e.g. [{"grade": "5.0", "weight": 1}, {"grade": "4.5", "weight": 0.5}]
+    student_id INT REFERENCES person(person_id) ON DELETE RESTRICT
 );
