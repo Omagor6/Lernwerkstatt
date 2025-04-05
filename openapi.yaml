@@ -1,42 +1,38 @@
 openapi: 3.0.0
 info:
-  title: Contact and Student API
-  description: API to retrieve student contact details, goals, and grades.
-  version: 1.0.0
-  contact:
-    name: Mathis Heldner
-    email: mathis.heldner@bluewin.ch
+  title: Person and Goals API
+  description: API to manage persons, their contacts, goals, and grades.
+  version: "1.0.0"
 servers:
   - url: http://localhost:8000
-    description: Local Development Server
+    description: Local development server
 paths:
-  /contact-persons/{person_id}:
+  /person/contact-persons/{person_id}:
     get:
-      summary: Get contact persons of a specific apprentice
-      description: Retrieve the contact persons for a given apprentice using their `person_id`.
+      summary: Retrieve contact persons for a given person.
+      description: Returns a list of contact persons related to the provided person ID.
+      operationId: get_contact_persons
       parameters:
         - name: person_id
           in: path
           required: true
+          description: ID of the person to retrieve contact persons for.
           schema:
             type: string
-          description: The unique ID of the apprentice for whom we want the contact persons.
       responses:
         '200':
-          description: Successfully retrieved the contact information.
+          description: A list of contact persons.
           content:
             application/json:
               schema:
                 type: object
-        '404':
-          description: Person not found.
-        '500':
-          description: Internal server error.
+                additionalProperties: true
 
-  /students/:
+  /person/students/:
     get:
-      summary: Get list of all students
-      description: Retrieve a list of all registered students.
+      summary: Retrieve all students.
+      description: Returns a list of students.
+      operationId: get_contacts
       responses:
         '200':
           description: A list of students.
@@ -46,86 +42,51 @@ paths:
                 type: array
                 items:
                   type: object
-        '500':
-          description: Internal server error.
+                  additionalProperties: true
+
+  /person/students/radar-chart/{person_id}:
+    get:
+      summary: Retrieve radar chart data for a specific student.
+      description: Returns radar chart data based on a person's ID.
+      operationId: get_radar_chart_data
+      parameters:
+        - name: person_id
+          in: path
+          required: true
+          description: ID of the person to retrieve radar chart data for.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Radar chart data for the specified person.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /goals/:
+    post:
+      summary: Create a new goal.
+      description: Accepts a JSON request body with goal data to create a new goal.
+      operationId: post_goal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The created goal data.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
 
   /goals/{person_id}:
     get:
-      summary: Get goals of a specific apprentice
-      description: Retrieve the goals of a specific apprentice identified by their `person_id`.
-      parameters:
-        - name: person_id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The unique ID of the apprentice to retrieve goals for.
-      responses:
-        '200':
-          description: Successfully retrieved goals for the person.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-        '404':
-          description: Goals not found for the specified apprentice.
-        '500':
-          description: Internal server error.
-
-  /grades/{person_id}:
-    get:
-      summary: Get grades of a specific apprentice
-      description: Retrieve the grades of a specific apprentice identified by their `person_id`.
-      parameters:
-        - name: person_id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The unique ID of the apprentice to retrieve grades for.
-      responses:
-        '200':
-          description: Successfully retrieved grades for the person.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-        '404':
-          description: Grades not found for the specified person.
-        '500':
-          description: Internal server error.
-
-components:
-  schemas:
-    Goal:
-      type: object
-      properties:
-        goal_id:
-          type: string
-        description:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        due_date:
-          type: string
-          format: date
-        goal_type:
-          type: string
-        status:
-          type: string
-
-    Grade:
-      type: object
-      properties:
-        subject:
-          type: string
-        grade:
-          type: string
-        created_at:
-          type: string
-          format: date-time
+      summary: Retrieve goals for a specific person.
+      description: Returns
