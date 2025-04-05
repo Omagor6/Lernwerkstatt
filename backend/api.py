@@ -40,6 +40,7 @@ def get_radar_chart_data(person_id: str):
 async def post_goal (request: Request):
     goal_data = await request.json()
     print(goal_data)
+    return goal_service.post_goal(goal_data)
 
 @app.get("/goals/{person_id}")
 def get_goals(person_id: str):

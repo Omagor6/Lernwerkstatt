@@ -35,7 +35,7 @@ CREATE TABLE goal (
     created_timestamp TIMESTAMP DEFAULT current_timestamp,
     due_date          DATE,
     goal_type         goal_type NOT NULL,
-    student_id INT REFERENCES person(person_id) ON DELETE RESTRICT
+    student_id INT REFERENCES person(person_id) ON DELETE RESTRICT 
 );
 
 -- CREATE absence TABLE

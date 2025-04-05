@@ -34,7 +34,7 @@ def execute_query(query, params=None):
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Database connection error. Please try again later."
         )
-    except DatabaseError as e:
+    except DatabaseError as e:        
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An error occurred while executing the query. Please try again later."
@@ -63,6 +63,8 @@ def fetch_query_results_as_dict(query, params=None):
             detail="Database connection error. Please try again later.",
         )
     except DatabaseError as e:
+        print(e)
+
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An error occurred while fetching query results. Please try again later.",
