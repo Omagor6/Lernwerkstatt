@@ -1,5 +1,4 @@
 import app.db.db_access_manager as db
-from fastapi import HTTPException, status
 
 def get_contact_persons(person_id):
     query = """

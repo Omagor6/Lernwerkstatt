@@ -1,5 +1,5 @@
 import datetime
-class grade_dto:
+class grade_dto_temp:
     def __init__(self, subject, grade, timestamp:datetime.datetime):
         self.subject = subject
         self.grade = str(grade)

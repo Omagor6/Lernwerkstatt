@@ -2,11 +2,15 @@
 
 This project provides a starting point for implementing the backend of the application. 
 
-The endpoint `get /students/` is fully implemented as an example: All the information on students is read from the person table and returned if the endpoint is called. (Add example data for a student to test this!) 
+There are several endpoints that are fully implemented:
+
+- `get /students/`: All the information on students is read from the person table and returned if the endpoint is called. (Add example data for a student in the DB to test this!) 
+
+- The endpoint `post /goals/{student_id}`: Is used to create a a new goal. 
+
+- The endpoint `get /goals/{student_id}`: The created goals of a student can be retrieved again.
 
 Currently not all implemented endpoints access the database yet. Mock data is returned for the endpoints accessed by the frontend. This functionality needs to be extended. 
-
-
 
 ## Setup
 
@@ -91,3 +95,46 @@ Now the command should work:
 ## Database Design
 
    ![ERD](.\resources\erd.png)
+
+   **person**
+
+   This table contains all the information of a person. Persons can have different roles: `student`, `mentor` and `coach`. A student has an `apprenticeship`, mentor and coach do not.
+   The password of a person will be stored here to. It needs to be hashed - plaintext is not secure.
+
+   **subject**
+
+  In a semester a student can have different subjects they take. The semester is identified by the first day of the semester. The grades are stored as JSON. That way it is possible to store the grades and the weight a specific grade has, since not every exam counts equally.
+
+  **goal**
+
+  Students have goals with a description and a grading (typically 1-4, meaning may vary depending on type). There are different types of goals. Currently only individual goals are implemented. Depending on the type of goal different mentors can view the goals (e.g. noly coach can access). 
+
+  **absence**
+
+  A mentor (e.g. BB) can register an absence of a student. The absence_time specifies half-day a student was absent: 
+  - date + 08:00:00 if the student was absent in the morning
+  - date + 12:00:00 if the student was absent in the afternoon
+
+  **has_contact**
+
+  This table specifies which contacts a student has in the contact book. A student can have any number of contacts.
+
+  **student_mentor**
+
+  This table specifies which mentor (coach or BB) is "responsible" for a student during a specific period. 
+
+  ## Architecture
+
+  This backend uses a layered architecture: 
+
+  **Controller**
+
+  FastApi - a python web-framework - is used to implement the endpoints. 
+
+  **Service**
+
+  For more complex requests, that require data from multiple layers, a service layer is used to make the code more readable and well structured. 
+
+  **Repository and DB access manager**
+
+  The repositories access or persist the the data in the database. For this the db_access_manager is used to provide easy and generic access to the database: There is a function for executing a query that updates existing data or creates a new entry - optionally parameters can be set in the query. The second function is used to fetch data. In this case the data is returned as a dict. In addition the DB access manager ensures consistent error handling.
