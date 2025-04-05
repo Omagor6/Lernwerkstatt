@@ -5,6 +5,6 @@ class goal_dto:
         self.description: str = description
         self.creation_date: str = creation_date.strftime("%d/%m/%Y")
         self.due_date: str = due_date.strftime("%d/%m/%Y, %H:%M:%S")
-        self.goal_tpye: str = goal_type
+        self.goal_type: str = goal_type
         self.grading: str = str(grading)
 
