@@ -1,6 +1,6 @@
 from typing import Union
 from app.service import person_service
-from app.service.dto import goal_dto
+from app.service.dto import goal_dto, grade_dto
 import datetime
 import json
 from fastapi.responses import JSONResponse
@@ -43,4 +43,8 @@ def get_goals(person_id: str):
 
 @app.get("grades/{person_id}")
 def get_grades(person_id):
-    return 
+    grades = [
+        vars(grade_dto.grade_dto("Mathe", "6", datetime.datetime(2023, 5, 17, 10, 40, 0))),
+        vars(grade_dto.grade_dto("Deutsch", "3", datetime.datetime(2022, 7, 17, 10, 20, 0)))
+    ]
+    return JSONResponse(content=grades)
