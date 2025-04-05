@@ -5,7 +5,7 @@ import datetime
 import json
 from fastapi.responses import JSONResponse
 
-from fastapi import FastAPI, HTTPException, status, BackgroundTasks
+from fastapi import FastAPI, HTTPException, status, BackgroundTasks, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -35,6 +35,11 @@ def get_contacts():
 @app.get("/person/students/radar-chart/{person_id}")
 def get_radar_chart_data(person_id: str):
     return person_service.get_radar_chart_info(person_id)
+
+@app.post("/goals/")
+async def post_goal (request: Request):
+    goal_data = await request.json()
+    print(goal_data)
 
 @app.get("/goals/{person_id}")
 def get_goals(person_id: str):
