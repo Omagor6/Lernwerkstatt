@@ -1,5 +1,5 @@
 import datetime
-class goal_dto:
+class goal_dto_temp:
     def __init__(self, goal_id, description,creation_date: datetime.date, due_date: datetime.datetime, goal_type, grading):
         self.goal_id: str = goal_id
         self.description: str = description
