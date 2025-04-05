@@ -10,14 +10,14 @@ DROP TYPE IF EXISTS role CASCADE;
 DROP TYPE IF EXISTS goal_type CASCADE;
 
 -- CREATE ENUM TYPES
-CREATE TYPE role AS ENUM ('student', 'coach', 'bb');
+CREATE TYPE person_role AS ENUM ('student', 'coach', 'bb');
 CREATE TYPE goal_type AS ENUM ('individual');
 
 -- CREATE person TABLE
 CREATE TABLE person (
     person_id      SERIAL PRIMARY KEY,
     name           VARCHAR(255),
-    type           role NOT NULL,
+    person_role    person_role NOT NULL,
     surname        VARCHAR(255),
     apprenticeship VARCHAR(255),
     phone          VARCHAR(255),
@@ -32,7 +32,7 @@ CREATE TABLE goal (
     grading           INT, -- 1–4 depending on type
     created_timestamp TIMESTAMP DEFAULT current_timestamp,
     due_date          DATE,
-    type              goal_type NOT NULL
+    goal_type         goal_type NOT NULL
 );
 
 -- CREATE absence TABLE

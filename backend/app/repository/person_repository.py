@@ -12,9 +12,8 @@ def get_contact_persons(person_id):
         res.append(result["role"])
 
 
-def get_students(field, value):
+def get_students():
     query = """
-    SELECT name, surname, email, apprenticeship FROM person WHERE role = apprentice and %s = %s
+    SELECT name, surname, email, apprenticeship FROM person WHERE person_role = 'student'
     """
-    params = (field, value)
-    return db.execute_query(query, params)
+    return db.fetch_query_results_as_dict(query)
