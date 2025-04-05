@@ -34,7 +34,6 @@ def get_contacts():
 
 @app.get("/goals/{person_id}")
 def get_goals(person_id: str):
-    # Return a JSON response instead of using json.dumps()
     goals = [
         vars(goal_dto.goal_dto("ABS2", "Ich kommuniziere rechtzeitig meine Absenzen", datetime.datetime(2020, 5, 17, 10, 30, 0), datetime.date(2020, 5, 17), "individual", "0")),
         vars(goal_dto.goal_dto("AAA6", "Ich bin teamfähig", datetime.datetime(2026, 5, 17, 10, 40, 0), datetime.date(2026, 5, 20), "standard", "Erfüllt"))
