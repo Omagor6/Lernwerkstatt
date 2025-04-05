@@ -40,7 +40,7 @@ def get_goals(person_id: str):
     ]
     return JSONResponse(content=goals)
 
-@app.get("grades/{person_id}")
+@app.get("/grades/{person_id}")
 def get_grades(person_id):
     grades = [
         vars(grade_dto.grade_dto("Mathe", "6", datetime.datetime(2023, 5, 17, 10, 40, 0))),
