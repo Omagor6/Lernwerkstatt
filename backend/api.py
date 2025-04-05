@@ -4,9 +4,24 @@ from app.service.dto import goal_dto
 import datetime
 import json
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, status, BackgroundTasks
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/contact-persons/{person_id}")
 def get_contact_persons(person_id):
