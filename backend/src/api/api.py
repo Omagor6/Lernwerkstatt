@@ -25,8 +25,4 @@ def get_goals(person_id):
 def get_grades(person_id):
     return json.dumps()
 
-@app.post("grades/{person_id}")
-def get_grades(person_id):
-    return json.dumps()
-
 
