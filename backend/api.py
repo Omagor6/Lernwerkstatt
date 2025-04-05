@@ -3,6 +3,7 @@ from app.service import person_service
 from app.service.dto import goal_dto
 import datetime
 import json
+from fastapi.responses import JSONResponse
 
 from fastapi import FastAPI, HTTPException, status, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,11 +18,9 @@ origins = [
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 @app.get("/contact-persons/{person_id}")
 def get_contact_persons(person_id):
@@ -33,9 +32,13 @@ def get_contacts():
     return {person_service.get_students()}
 
 @app.get("/goals/{person_id}")
-def get_goals(person_id):
-    return json.dumps(goal_dto.goal_dto("ABS2", "Ich kommuniziere rechtzeitig meine Absenzen", datetime.datetime(2020, 5, 17, 10, 30, 0), datetime.date(2020, 5, 17), "individual", "0"), goal_dto.goal_dto("AAA6", "Ich bin teamfähig", datetime.datetime(2020, 5, 17, 10, 40, 0), datetime.date(2020, 5, 20), "standard", "Erfüllt"))
-    return {person_service.get_goals(person_id)}
+def get_goals(person_id: str):
+    # Return a JSON response instead of using json.dumps()
+    goals = [
+        goal_dto.goal_dto("ABS2", "Ich kommuniziere rechtzeitig meine Absenzen", datetime.datetime(2020, 5, 17, 10, 30, 0), datetime.date(2020, 5, 17), "individual", "0"),
+        goal_dto.goal_dto("AAA6", "Ich bin teamfähig", datetime.datetime(2020, 5, 17, 10, 40, 0), datetime.date(2020, 5, 20), "standard", "Erfüllt")
+    ]
+    return JSONResponse(content=goals)
 
 @app.get("grades/{person_id}")
 def get_grades(person_id):
