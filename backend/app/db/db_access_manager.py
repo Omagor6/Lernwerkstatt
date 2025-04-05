@@ -30,16 +30,19 @@ def execute_query(query, params=None):
                 affected_rows = cursor.rowcount
                 return affected_rows
     except OperationalError as e:
+        print(e)
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Database connection error. Please try again later."
         )
-    except DatabaseError as e:        
+    except DatabaseError as e:  
+        print(e)      
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An error occurred while executing the query. Please try again later."
         )
     except Exception as e:
+        print(e)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An unexpected error occurred. Please try again later."
@@ -58,18 +61,19 @@ def fetch_query_results_as_dict(query, params=None):
                 results = cursor.fetchall()
                 return results
     except OperationalError as e:
+        print(e)
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Database connection error. Please try again later.",
         )
     except DatabaseError as e:
         print(e)
-
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An error occurred while fetching query results. Please try again later.",
         )
     except Exception as e:
+        print(e)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An unexpected error occurred. Please try again later.",
