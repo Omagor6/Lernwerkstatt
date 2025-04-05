@@ -51,6 +51,8 @@ def get_goals(person_id: str):
 def get_grades(person_id):
     ###DUMMY###
     grades = [
+        vars(grade_dto_temp.grade_dto_temp("Mathe", "4", datetime.datetime(2023, 5, 17, 10, 40, 0))),
+        vars(grade_dto_temp.grade_dto_temp("Deutsch", "4.5", datetime.datetime(2022, 7, 17, 10, 20, 0))),
         vars(grade_dto_temp.grade_dto_temp("Mathe", "6", datetime.datetime(2023, 5, 17, 10, 40, 0))),
         vars(grade_dto_temp.grade_dto_temp("Deutsch", "3", datetime.datetime(2022, 7, 17, 10, 20, 0)))
     ]
